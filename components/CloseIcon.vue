@@ -1,13 +1,44 @@
 <template>
-  <div @click="onClose" class="close-icon"><span>×</span></div>
+  <div
+      class="close-icon"
+      @click="$emit('click')"
+      @mouseover="changeToHoverText"
+      @mouseleave="changeToDefaultButtonText"
+      >
+    <span :class="{ 'animated-text': isHoverTextEnable }">{{ buttonText }}</span>
+  </div>
 </template>
 
 <script>
   export default {
     name: "CloseIcon",
+    props: {
+      isHoverTextEnable: {
+        type: Boolean,
+        default: true
+      },
+      hoverText: {
+        type: String,
+        default: 'close'
+      }
+    },
     methods: {
-      onClose () {
-        this.$emit('onClose')
+      changeToHoverText () {
+        if (this.isHoverTextEnable) {
+          this.buttonText = this.hoverText
+        }
+      },
+
+      changeToDefaultButtonText () {
+        if (this.isHoverTextEnable) {
+          this.buttonText = '×'
+        }
+      },
+
+    },
+    data () {
+      return {
+        buttonText: '×'
       }
     }
   }
@@ -18,8 +49,9 @@
   position: absolute;
   z-index: 1;
   height: 16px;
-  width: 16px;
-
+  min-width: 16px;
+  padding-right: 3px;
+  padding-left: 3px;
   margin: 3.5px 4px;
 
   border-radius: 100px;
@@ -30,7 +62,14 @@
     background-color: rgb(232, 248, 248);
 
     span {
-      color: #8098cf
+      color: #6a7fae;
+
+      &.animated-text {
+        font-size: 12px;
+        padding-top: 4px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
     }
   }
   span {

@@ -12,6 +12,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs": "^1.2.8",
     "nuxt": "^2.0.0"
   },
