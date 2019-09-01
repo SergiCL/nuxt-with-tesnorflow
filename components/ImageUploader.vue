@@ -23,10 +23,12 @@
     </div>
 
     <div class="data-zone">
-      <div v-if="predictions.length" class="predictions">
+      <div v-if="predictions.length || isLoading" class="predictions">
         <h3>Predictions</h3>
 
-        <table class="prediction-table">
+        <loader v-show="isLoading" class="loader"></loader>
+
+        <table v-show="!isLoading" class="prediction-table">
           <tr>
             <th class="prediction-col">Prediction</th>
             <th class="accuracy-col">Accuracy</th>
@@ -45,16 +47,24 @@
   import CloseIcon from "./CloseIcon";
 
   import * as mobilenet from '@tensorflow-models/mobilenet';
+  import Loader from './Loader'
 
   export default {
     name: 'ImageUploader',
     components: {
+      Loader,
       CloseIcon
     },
     props: {
       caption: {
         type: String,
         default: 'Click to upload an image'
+      }
+    },
+
+    watch: {
+      predictions () {
+        this.isLoading = false
       }
     },
 
@@ -95,6 +105,7 @@
       },
 
       async _predict () {
+        this.isLoading = true
         const imgToAnalyze = document.getElementById('loaded-img')
 
         // Load the model.
@@ -133,6 +144,7 @@
         zoneInitialStyle: null,
         imgInitialStyle: null,
         model: null,
+        isLoading: false,
         predictions: {}
       }
     }
@@ -170,6 +182,10 @@
   }
 
   .data-zone {
+    .loader {
+      margin-top: 82px;
+    }
+
     .predictions {
       width: 360px;
       margin-left: auto;
