@@ -10,7 +10,7 @@
       <div v-show="this.imageData.length" class="image-zone" :style="zoneInitialStyle">
         <close-icon
             @click="$refs.fileInput.click()"
-            hoverText="Upload another image">
+            hoverText="CLick to upload another image">
         </close-icon>
         <img
             class="loaded-image"

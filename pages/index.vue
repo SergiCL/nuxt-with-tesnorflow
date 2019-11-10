@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .container {
   min-height: 100vh;
   display: flex;
@@ -33,6 +33,14 @@ export default {
   font-size: 87px;
   color: #4c6883;
   text-align: justify;
+
+  @media (max-width: 768px) {
+    font-size: 56px;
+  }
+
+  @media (max-width: 490px) {
+    font-size: 38px;
+  }
 }
 
 .subtitle {
@@ -42,6 +50,14 @@ export default {
   text-align: right;
   padding-bottom: 30px;
   padding-right: 5px;
+
+  @media (max-width: 768px) {
+    font-size: 23px;
+  }
+
+  @media (max-width: 490px) {
+    font-size: 18px;
+  }
 }
 </style>
 
